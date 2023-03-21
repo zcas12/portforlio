@@ -32,21 +32,19 @@
     <el-row>
       <timeWeather></timeWeather>
     </el-row>-->
-<!--    <el-row >
+    <el-row >
       <el-col
         class="pa-2"
         :xs="24" :sm="24" :md="24" :lg="12">
         <time-chart :chartData="pcpList" dataType="pcp"></time-chart>
-        {{pcpList}}
       </el-col>
       <el-col
         class="pa-2"
         :xs="24" :sm="24" :md="24" :lg="12">
         <time-chart :chartData="rehList" dataType="reh"></time-chart>
-        {{rehList}}
       </el-col>
-    </el-row>-->
-    {{rehList}}
+    </el-row>
+
   </div>
 </template>
 
