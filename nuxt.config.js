@@ -1,5 +1,5 @@
 export default {
-  // Target: https://go.nuxtjs.dev/config-target
+  ssr: false,
   target: 'static',
 
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -30,7 +30,7 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '@/plugins/element-ui',
-    { src: '@/plugins/apexcharts', ssr: false }
+    '@/plugins/apexcharts'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

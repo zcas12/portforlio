@@ -1,6 +1,5 @@
 <template>
   <el-card>
-    {{chartOptions}}
     <div>
       <h4 style="color: #606266;">{{ title }}</h4>
     </div>
