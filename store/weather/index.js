@@ -79,9 +79,9 @@ export const actions = {
     time = time + "00"
     const key = "5gGuJsv9owR1AVnJPeTVmJD32a0%2BQX7xmAKj8mNQo6nnS%2FmaC67VPc12JQGZjAka5GMiVkiXhZS9SQiDeeuX3Q%3D%3D"
     //단기 예보 05:00 기준
-    const vilageUrl = `http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?ServiceKey=${key}&pageNo=1&numOfRows=1300&dataType=JSON&base_date=${date}&base_time=0500&nx=${region.nx}&ny=${region.ny}`
+    const vilageUrl = `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?ServiceKey=${key}&pageNo=1&numOfRows=1300&dataType=JSON&base_date=${date}&base_time=0500&nx=${region.nx}&ny=${region.ny}`
     //초단기 예보
-    const ultraUrl = `http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst?ServiceKey=${key}&pageNo=1&numOfRows=1300&dataType=JSON&base_date=${date}&base_time=${time}&nx=${region.nx}&ny=${region.ny}`
+    const ultraUrl = `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst?ServiceKey=${key}&pageNo=1&numOfRows=1300&dataType=JSON&base_date=${date}&base_time=${time}&nx=${region.nx}&ny=${region.ny}`
 
     let vilageResult =  await this.$axios.get(vilageUrl);
     //let ultraResult =  await this.$axios.get(ultraUrl);
