@@ -26,12 +26,12 @@
       >
       </el-button>
     </el-row>
-    <el-row>
+<!--    <el-row>
       <todayWeather></todayWeather>
     </el-row>
     <el-row>
       <timeWeather></timeWeather>
-    </el-row>
+    </el-row>-->
 <!--    <el-row >
       <el-col
         class="pa-2"
@@ -46,6 +46,7 @@
         {{rehList}}
       </el-col>
     </el-row>-->
+    {{PCP}}
   </div>
 </template>
 
@@ -89,6 +90,9 @@ export default {
       { value: '064', label: '제주' }
     ]
   }),
+  created() {
+
+  },
   computed: {
     ...mapGetters('weather', ['TMP','PCP','REH']),
 /*    tmp(){
@@ -101,7 +105,7 @@ export default {
     pcpList(){
       const pcp = _.cloneDeep(this.PCP);
       let hh = this.hour;
-      console.log("hh = " + hh)
+
       const index = _.findIndex(this.PCP, { fcstDate: this.today, fcstTime: hh+"00" })
 
       pcp.splice(0, index)

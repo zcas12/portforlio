@@ -9,7 +9,7 @@
       active-text-color="#3C9AFF"
       background-color="#263544"
     >
-      <el-menu-item index="/weather">
+      <el-menu-item index="/weather/">
         <i class="el-icon-sunny"></i>
         <span slot="title">오늘의 날씨</span>
       </el-menu-item>
