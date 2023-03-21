@@ -37,11 +37,13 @@
         class="pa-2"
         :xs="24" :sm="24" :md="24" :lg="12">
         <time-chart :chartData="pcpList" dataType="pcp"></time-chart>
+        {{pcpList}}
       </el-col>
       <el-col
         class="pa-2"
         :xs="24" :sm="24" :md="24" :lg="12">
         <time-chart :chartData="rehList" dataType="reh"></time-chart>
+        {{rehList}}
       </el-col>
     </el-row>
   </div>
@@ -93,12 +95,13 @@ export default {
       return _.filter(this.TMP, { fcstDate: this.today });
     },*/
     hour(){
-      let today =new Date();
+      let today = new Date();
       return today.getHours();
     },
     pcpList(){
       const pcp = _.cloneDeep(this.PCP);
       let hh = this.hour;
+      console.log("hh = " + hh)
       const index = _.findIndex(this.PCP, { fcstDate: this.today, fcstTime: hh+"00" })
 
       pcp.splice(0, index)

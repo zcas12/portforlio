@@ -94,13 +94,7 @@ export const actions = {
     const PCP = _.filter(vilage, { category: 'PCP' });// 강수량
     const REH = _.filter(vilage, { category: 'REH' });// 습도
     const WSD = _.filter(vilage, { category: 'WSD' });// 풍속
-    console.log("-----------------------")
-    console.log(SKY)
-    console.log(PCP)
-    console.log(REH)
-    console.log(WSD)
-    console.log(SKY)
-    console.log("-----------------------")
+
     commit("TMPMutation", TMP);
     commit("TMXMutation", TMX);
     commit("TMNMutation", TMN);
