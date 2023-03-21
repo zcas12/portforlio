@@ -26,12 +26,12 @@
       >
       </el-button>
     </el-row>
-<!--    <el-row>
+    <el-row>
       <todayWeather></todayWeather>
     </el-row>
     <el-row>
       <timeWeather></timeWeather>
-    </el-row>-->
+    </el-row>
     <el-row >
       <el-col
         class="pa-2"
