@@ -1,5 +1,6 @@
 <template>
   <el-card>
+    {{series}}
     <div>
       <h4 style="color: #606266;">{{ title }}</h4>
     </div>
@@ -111,10 +112,13 @@ export default {
   },
   methods:{
     loadData() {
+      console.log(this.series)
       this.series[0] = {
         name: this.dataType === "pcp" ? '강수량' : this.dataType === "reh" ? '습도': '',
         data: _.map(this.chartData, 'fcstValue').map(Number)
       }
+      console.log(this.series)
+      console.log("======================")
     },
     updateData(){
       this.series[0] = {
