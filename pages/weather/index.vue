@@ -46,7 +46,7 @@
         {{rehList}}
       </el-col>
     </el-row>-->
-    {{pcpList}}
+    {{rehList}}
   </div>
 </template>
 
@@ -105,14 +105,10 @@ export default {
     pcpList(){
       const pcp = _.cloneDeep(this.PCP);
       let hh = this.hour;
-      console.log("start")
-      console.log(pcp)
       const index = _.findIndex(this.PCP, { fcstDate: this.today, fcstTime: hh+"00" })
-      console.log(index)
+
       pcp.splice(0, index)
       pcp.length = 15;
-      console.log(pcp)
-      console.log("end")
       return pcp;
     },
     rehList(){
