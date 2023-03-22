@@ -9,6 +9,8 @@ export const state = () => ({
   PCP: [],
   REH: [], //습도
   WSD: [], //풍속
+  openWeather:{},
+  airKorea:{},
   koreaXy:[
     { region: '02', nx: 60, ny:127 },
     { region: '051', nx: 98, ny:76 },
@@ -31,21 +33,13 @@ export const state = () => ({
   koreaCity:[
     { region: '02', cityName: 'seoul' },
     { region: '051', cityName: 'busan' },
-    { region: '053', nx: 89, ny:90 },
-    { region: '032', nx: 55, ny:127 },
-    { region: '062', nx: 58, ny:74 },
-    { region: '042', nx: 80, ny:75 },
-    { region: '052', nx: 102, ny:84 },
-    { region: '044', nx: 65, ny:103 },
-    { region: '031', nx: 60, ny:121 },
-    { region: '033', nx: 92, ny:131 },
-    { region: '043', nx: 69, ny:106 },
-    { region: '041', nx: 68, ny:100 },
-    { region: '063', nx: 63, ny:89 },
-    { region: '061', nx: 50, ny:67 },
-    { region: '054', nx: 91, ny:106 },
-    { region: '055', nx: 90, ny:77 },
-    { region: '064', nx: 52, ny:38 }
+    { region: '053', cityName: 'daegu' },
+    { region: '032', cityName: 'incheon' },
+    { region: '062', cityName: 'gwangju' },
+    { region: '042', cityName: 'daejeon' },
+    { region: '052', cityName: 'ulsan' },
+    { region: '044', cityName: 'sejong' },
+    { region: '064', cityName: 'jeju' }
   ]
 })
 export const mutations = {
@@ -70,6 +64,12 @@ export const mutations = {
   WSDMutation(state, WSD){
     state.WSD = WSD;
   },
+  openWeatherMutation(state, openWeather){
+    state.openWeather = openWeather
+  },
+  airKoreaMutation(state, airKorea){
+    state.airKorea = airKorea
+  }
 }
 export const actions = {
   async findWeather({commit,state}, param) {
@@ -105,11 +105,25 @@ export const actions = {
   },
   async findOpenWeather({commit,state}, param) {
     const region = _.find(state.koreaCity, {region: param?.region ? param?.region : '02'});
-    const key = "fe009c86e86ad46413742ef50f12572f";
-    const url = `https://api.openweathermap.org/data/2.5/forecast?q=${region.cityName}&appid=${key}`;
-    let result =  await this.$axios.get(url);
-    console.log(result.data)
+    if(!region){
+      const result = {};
+      commit("openWeatherMutation", result);
+    }else {
+      const key = "fe009c86e86ad46413742ef50f12572f";
+      const url = `https://api.openweathermap.org/data/2.5/weather?q=${region.cityName}&appid=${key}`;
+      let result = await this.$axios.get(url).catch(e => console.log(e));
+      result = result?.data?.main
 
+      commit("openWeatherMutation", result);
+    }
+  },
+  async findAirKorea({commit,state},param) {
+    const city = param?.label ? param?.label : "서울";
+    const key = "5gGuJsv9owR1AVnJPeTVmJD32a0%2BQX7xmAKj8mNQo6nnS%2FmaC67VPc12JQGZjAka5GMiVkiXhZS9SQiDeeuX3Q%3D%3D";
+    const url = `https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty?serviceKey=${key}&returnType=json&numOfRows=1&pageNo=1&sidoName=${city}&ver=1.0`;
+    let result = await this.$axios.get(url).catch(e => console.log(e));
+    result = result?.data?.response?.body?.items[0]
+    commit("airKoreaMutation", result);
   }
 }
 export const getters = {
@@ -120,4 +134,6 @@ export const getters = {
   PCP: (state) => state.PCP,
   REH: (state) => state.REH,
   WSD: (state) => state.WSD,
+  openWeather: (state) => state.openWeather,
+  airKorea: (state) => state.airKorea,
 }

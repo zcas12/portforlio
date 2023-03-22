@@ -60,6 +60,8 @@ import _ from "lodash";
 export default {
   async asyncData({store}) {
     await store.dispatch("weather/findWeather")
+    await store.dispatch("weather/findOpenWeather")
+    await store.dispatch("weather/findAirKorea")
   },
   components:{
     todayWeather,timeGrid,timeChart,timeWeather
@@ -98,7 +100,7 @@ export default {
     },*/
     hour(){
       let today = new Date();
-      return today.getHours();
+      return today.getHours() < 10 ? "0" + today.getHours() : today.getHours();
     },
     pcpList(){
       const pcp = _.cloneDeep(this.PCP);
@@ -120,14 +122,16 @@ export default {
     },
   },
   methods: {
-    ...mapActions('weather', ['findWeather','findOpenWeather']),
+    ...mapActions('weather', ['findWeather','findOpenWeather','findAirKorea']),
     search(){
       const param = {
         region: this.region,
         date : dayjs(this.date).format('YYYYMMDD')
       }
+      const airParam = _.find(this.regionList, {value: this.region})
       this.findWeather(param);
-      //this.findOpenWeather(param);
+      this.findOpenWeather(param);
+      this.findAirKorea(airParam);
     }
   }
 }

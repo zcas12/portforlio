@@ -1340,3 +1340,21 @@ body {
   box-sizing: border-box;
   height: 100%;
 }
+.grey{
+  color: #606266;
+}
+.ice{
+  color: #3DC9CD;
+}
+.blue{
+  color: #00A1E9;
+}
+.green{
+  color: #67C23A;
+}
+.orange{
+  color: #FFA500;
+}
+.red {
+  color: #f56c6c;
+}

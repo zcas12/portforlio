@@ -26,6 +26,7 @@
             <el-tooltip class="item" effect="dark" content="메뉴" placement="bottom">
               <el-button type="info" icon="el-icon-menu" circle @click="changeMenuCollapse"></el-button>
             </el-tooltip>
+            <h3 style="color: #606266"></h3>
           </div>
           <div>
 
@@ -50,7 +51,7 @@ import dayjs from "dayjs";
 export default {
   name: 'DefaultLayout',
   data: () => ({
-    isCollapse: false,
+    isCollapse: true,
     now: "00:00:00",
   }),
   created() {

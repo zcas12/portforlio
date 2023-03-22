@@ -17,7 +17,7 @@ export default {
     }
   },
   created() {
-    this.$router.push({path: '/weather'})
+    this.$router.push({path: '/weather/'})
   },
   methods: {
 
