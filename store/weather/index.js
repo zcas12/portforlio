@@ -9,6 +9,7 @@ export const state = () => ({
   PCP: [],
   REH: [], //습도
   WSD: [], //풍속
+  PTY: [], //비
   openWeather:{},
   airKorea:{},
   koreaXy:[
@@ -64,6 +65,9 @@ export const mutations = {
   WSDMutation(state, WSD){
     state.WSD = WSD;
   },
+  PTYMutation(state, PTY){
+    state.PTY = PTY;
+  },
   openWeatherMutation(state, openWeather){
     state.openWeather = openWeather
   },
@@ -94,7 +98,7 @@ export const actions = {
     const PCP = _.filter(vilage, { category: 'PCP' });// 강수량
     const REH = _.filter(vilage, { category: 'REH' });// 습도
     const WSD = _.filter(vilage, { category: 'WSD' });// 풍속
-
+    const PTY = _.filter(vilage, { category: 'PTY' });// 비
     commit("TMPMutation", TMP);
     commit("TMXMutation", TMX);
     commit("TMNMutation", TMN);
@@ -102,6 +106,8 @@ export const actions = {
     commit("PCPMutation", PCP);
     commit("REHMutation", REH);
     commit("WSDMutation", WSD);
+    commit("PTYMutation", PTY);
+
   },
   async findOpenWeather({commit,state}, param) {
     const region = _.find(state.koreaCity, {region: param?.region ? param?.region : '02'});
@@ -134,6 +140,7 @@ export const getters = {
   PCP: (state) => state.PCP,
   REH: (state) => state.REH,
   WSD: (state) => state.WSD,
+  PTY: (state) => state.PTY,
   openWeather: (state) => state.openWeather,
   airKorea: (state) => state.airKorea,
 }

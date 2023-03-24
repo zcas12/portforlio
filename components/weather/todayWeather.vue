@@ -43,12 +43,12 @@
             style="color: #606266"
           ></i>
           <i
-            v-if="current(sky)?.fcstValue === '4'"
+            v-if="current(sky)?.fcstValue === '4' && current(pty).fcstValue === '0'"
             class="el-icon-cloudy weather-icon"
             style="color: #606266"
           ></i>
           <i
-            v-if="current(sky)?.fcstValue === '2'"
+            v-if="current(pty).fcstValue !== '0'"
             class="el-icon-heavy-rain weather-icon"
             style="color: #00A1E9"
           ></i>
@@ -63,11 +63,11 @@
             class="weather-font"
           >구름 조금</span>
           <span
-            v-if="current(sky)?.fcstValue === '4'"
+            v-if="current(sky)?.fcstValue === '4' && current(pty).fcstValue === '0'"
             class="weather-font"
           >흐림</span>
           <span
-            v-if="current(sky)?.fcstValue === '2'"
+            v-if="current(pty).fcstValue !== '0'"
             class="weather-font"
           >비</span>
         </el-row>
@@ -165,7 +165,7 @@ export default {
     this.dayAndNight();
   },
   computed:{
-    ...mapGetters('weather', ['TMP','TMX','TMN','SKY','REH','WSD','openWeather','airKorea']),
+    ...mapGetters('weather', ['TMP','TMX','TMN','SKY','REH','WSD','PTY','openWeather','airKorea']),
     hour(){
       let today = new Date();
       return today.getHours() < 10 ? "0" + today.getHours() : today.getHours();
@@ -200,11 +200,12 @@ export default {
     wsd(){
       return _.filter(this.WSD, { fcstDate: this.today });
     },
+    pty(){
+      return _.filter(this.PTY, { fcstDate: this.today });
+    },
     pm10Grade(){
       let pm10Value = this.airKorea?.pm10Value
       pm10Value = parseInt(pm10Value)
-      console.log(15 < pm10Value < 31)
-      console.log(pm10Value)
       return pm10Value < 16 ? "최고" : 15 < pm10Value && pm10Value < 31 ? "좋음" : 30 < pm10Value && pm10Value < 81 ? "보통" : 80 < pm10Value && pm10Value< 151 ? "나쁨" :  pm10Value > 150 ? "매우나쁨" : "-"
     },
     pm25Grade(){
@@ -226,7 +227,8 @@ export default {
   },
   methods:{
     current(val){
-      return _.find(val, { fcstTime: dayjs().get("h") + "00" });
+      const hh = this.hour;
+      return _.find(val, { fcstTime: hh + "00" });
     },
     dayAndNight(){
       let today =new Date();

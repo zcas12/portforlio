@@ -42,7 +42,7 @@
             style="color: #606266"
           ></i>
           <i
-            v-if="sky?.fcstValue === '2'"
+            v-if="sky?.fcstValue !== '1' && sky?.fcstValue !== '3' && sky?.fcstValue !== '4'"
             class="el-icon-heavy-rain weather-icon"
             style="color: #00A1E9"
           ></i>
@@ -79,10 +79,10 @@ export default {
     this.dayAndNight();
   },
   computed:{
-    ...mapGetters('weather', ['TMP','TMX','TMN','SKY','REH','WSD']),
+    ...mapGetters('weather', ['TMP','TMX','TMN','SKY','REH','WSD','PTY']),
     hour(){
-      let today =new Date();
-      return today.getHours();
+      let today = new Date();
+      return today.getHours() < 10 ? "0" + today.getHours() : today.getHours();
     },
     tmpList(){
       const tmp = _.cloneDeep(this.TMP);

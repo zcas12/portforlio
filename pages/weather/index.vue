@@ -44,7 +44,6 @@
         <time-chart :chartData="rehList" dataType="reh"></time-chart>
       </el-col>
     </el-row>
-
   </div>
 </template>
 
